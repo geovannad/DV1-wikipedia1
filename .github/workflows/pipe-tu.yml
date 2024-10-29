@@ -1,0 +1,21 @@
+name: Deploy Web Site Ge
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+  
+    runs-on: ubuntu-latest
+
+    
+    steps:
+      - name: Acesso EC2
+        run: |
+           echo "${{secrets.KEY_TU}}" > wiki-ge.pem && chmod 600 wiki-ge.pem
+           ssh -o StrictHostKeyChecking=no -i "wiki-ge.pem"  ubuntu@ec2-50-16-95-194.compute-1.amazonaws.com "
+               cd /var/www/html &&
+               git pull "
