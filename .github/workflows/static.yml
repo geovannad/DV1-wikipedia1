@@ -1,0 +1,17 @@
+name: Deploy Web 
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+  
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Acesso EC2
+        run: |
+           echo "${{secrets.KEY_GG}}" > webserver.pem && chmod 600 webserver.pem
+           ssh -o StrictHostKeyChecking=no -i "webserver.pem" ubuntu@ec2-52-44-40-50.compute-1.amazonaws.com "
+               cd /var/www/html/ && sudo git pull
+           "
