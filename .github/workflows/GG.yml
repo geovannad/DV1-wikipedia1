@@ -13,5 +13,5 @@ jobs:
         run: |
            echo "${{secrets.KEY_GG}}" > webserver.pem && chmod 600 webserver.pem
            ssh -o StrictHostKeyChecking=no -i "webserver.pem" ubuntu@ec2-52-44-40-50.compute-1.amazonaws.com "
-               cd /var/www/html/ && sudo git pull
+               cd /var/www/html/ && sudo git pull origin main
            "
